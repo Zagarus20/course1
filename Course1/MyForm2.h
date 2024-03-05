@@ -2,6 +2,8 @@
 #include "Struct.h"
 #include <fstream>
 #include <iostream>
+#include <msclr\marshal.h>
+
 using namespace std;
 namespace Course1 {
 
@@ -11,6 +13,8 @@ namespace Course1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
+
 
 	/// <summary>
 	/// Сводка для MyForm2
@@ -158,22 +162,21 @@ namespace Course1 {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		char Modele;
-		char Architecture;
-		int CoreFrequncy;
-		int VideoMemoryFrency;
-		int VideoMemory;
-		int MemoryBusBitsize;
-		int Energy;
+		//Запис даних з textBoxt в структуру
+		VideoCart videoCart;
+		marshal_context^ ctx = gcnew marshal_context();
+		String^ tmp;
+		tmp = textBox_Modele->Text;
+		strcpy_s(videoCart.Modele, ctx->marshal_as<const char*>(tmp));
+		tmp = textBox_Architecture->Text;
+		strcpy_s(videoCart.Architecture, ctx->marshal_as<const char*>(tmp));
 
-		Modele = char::Parse(textBox_Modele->Text);
-		Architecture = char::Parse(textBox_Architecture->Text);
-		CoreFrequncy = int::Parse(textBox_CoreFrequncy->Text);
-		VideoMemoryFrency = int::Parse(textBox_VideoMemoryFrency->Text);
-		VideoMemory = int::Parse(textBox_VideoMemory->Text);
-		MemoryBusBitsize = int::Parse(textBox_MemoryBusBitsize->Text);
-		Energy = int::Parse(textBox_Energy->Text);
-		
+		videoCart.CoreFrequncy = int::Parse(textBox_CoreFrequncy->Text);
+		videoCart.VideoMemoryFrency = int::Parse(textBox_CoreFrequncy->Text);
+		videoCart.VideoMemory = int::Parse(textBox_CoreFrequncy->Text);
+		videoCart.MemoryBusBitsize = int::Parse(textBox_CoreFrequncy->Text);;
+		videoCart.Energy = int::Parse(textBox_CoreFrequncy->Text);
+
 	}
 	};
 }
