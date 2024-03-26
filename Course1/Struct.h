@@ -12,3 +12,12 @@ struct VideoCart
 	int MemoryBusBitsize;
 	int Energy;
 };
+struct TestGame 
+{
+	char NemeGame[50];
+	int CodGame;
+	char SettingsGame[50];
+	int Minimal_FPS;
+	int Average_FPS;
+	int Maximum_FPS;
+};
